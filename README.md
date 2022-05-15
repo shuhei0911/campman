@@ -14,6 +14,11 @@
 ### 主な利用シーン
 <キャンプグッズを揃えるときは現地で組み立て方がわからなくなったときに動画を見て組み立てられる。>
 
+## 実装機能リスト
+
+https://docs.google.com/spreadsheets/d/13tEN1VETrFajFOFPdTtn0TtLVK_ydy3iIXiJaB9Lst8/edit?usp=sharing
+
+
 ## 設計書
 <...>
 
