@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @video.title
+%p
+  %b Introduction:
+  = @video.introduction
+%p
+  %b Youtube url:
+  = @video.youtube_url
+
+= link_to 'Edit', edit_video_path(@video)
+\|
+= link_to 'Back', videos_path

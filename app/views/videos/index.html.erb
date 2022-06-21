@@ -1,0 +1,10 @@
+<% @videos.each do |video| %>
+      <tr>
+        <td><%= video.title %></td>
+        <td><%= video.introduction %></td>
+        <td><iframe width="240" height="240" src="https://www.youtube.com/embed/<%#= @video.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+        <td><%= link_to 'Show', video %></td>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+<% end %>

@@ -1,5 +1,5 @@
-require "active_support/core_ext/integer/time"
 
+#require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -73,4 +73,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.hosts << "a0237ac469ef4cf191b6faff5a77b999.vfs.cloud9.us-east-1.amazonaws.com"
+
 end

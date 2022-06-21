@@ -1,0 +1,21 @@
+<section class="wrapper flex">
+	
+		<h3>動画一覧</h3>
+		<% @Video.each do |video| %>
+			<%= link_to video, video_path(video_id: video.id) %>
+		<% end %>
+	
+	<div class="content">
+		<div class="mv"></div>
+		<h2 class="section-ttl">オススメ商品</h2>
+		<div class="items">
+			<% @items.each do |item| %>
+				<%= link_to item_path(item) do %>
+					<%#= attachment_image_tag item, :image, format: "jpeg", fallback: "no-image.png" %>
+					<p><%= item.name %></p>
+					<p><%= item.with_tax_price %>円</p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,81 @@
+<section class="wrapper flex">
+	<div class="sidebar">
+		<h3>使用動画一覧</h3>
+		<% @genres.each do |genre| %>
+		<%= link_to genre.name, items_path(genre_id: genre.id) %>
+		<% end %>
+	</div>
+
+	<div class="content">
+		<h2 class="section-ttl"><%= @item.name %></h2>
+		<%= render 'layouts/error_messages', resource: @cart_item %>
+		<div class="flex">
+			<%#= attachment_image_tag @item, :image, format: "jpeg", fallback: "no-image.png", class: "item_image" %>
+			<div class="item_info">
+				<h4><%= @item.introduction %></h4>
+				<p>ジャンル: <%= link_to @item.genre.name, items_path(genre_id: @item.genre_id) %></p>
+				<p>
+					¥<%= @item.with_tax_price %>(税込)
+					<% if @item.is_active? %>
+					<span class="text-active">販売中</span>
+					<% else %>
+					<span class="text-invalid">販売停止中</span>
+					<% end %>
+				</p><br>
+				<% if customer_signed_in? %>
+					<% cart_item = current_customer.has_in_cart(@item) %>
+					<% if cart_item %>
+						<%= form_for [@item, cart_item] do |f| %>
+							<p>こちらの商品は、既にカートに入っています。</p>
+							<%= f.select :amount, [*(1..10)] %>
+							<%= f.submit "数量変更", class: "btn btn-primary" %>
+						<% end %>
+					<% elsif @item.is_active? %>
+						<%= form_for [@item, @cart_item] do |f| %>
+							<p>数量を選択して下さい。</p>
+							<%= f.select :amount, [*(1..10)], {selected: 1} %>
+							<%= f.submit "カートに入れる", class: "btn btn-primary" %>
+						<% end %>
+					<% else %>
+						<p class="bold">こちらの商品は、現在販売停止中です。</p>
+					<% end %>
+				<% else %>
+					<p>カート機能をご利用いただくには、<br><%= link_to "こちら", new_customer_registration_path, class: "underline" %>から新規登録を行なってください。</p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div>
+  	<p>コメント件数：<%= @item.comments.count %></p>
+  	<% @item.comments.each do |comment| %>
+    	<p><%#= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+    	<%= comment.customer.first_name %>
+    	<%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    	<% if comment.customer == current_customer %>
+      	<%= link_to "削除", item_comment_path(comment.item, comment), method: :delete %>
+    	<% end %>
+
+    	<% if @item.favorited_by?(current_customer) %>
+    		<p>
+      		<%= link_to item_favorites_path(@item), method: :delete do %>
+        		♥<%= @item.favorites.count %> いいね
+      		<% end %>
+    		</p>
+    		<% else %>
+    		<p>
+      		<%= link_to item_favorites_path(@item), method: :post do %>
+        		♡<%= @item.favorites.count %> いいね
+      		<% end %>
+    		</p>
+  		<% end %>
+  	<% end %>
+	</div>
+	<div>
+  	<%= form_with model: [@item, @comment] do |f| %>
+    	<%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    	<%= f.submit "送信する" %>
+  	<% end %>
+	</div>
+
+</section>
