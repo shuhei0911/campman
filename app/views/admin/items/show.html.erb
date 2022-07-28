@@ -3,16 +3,10 @@
 	<div class="flex">
 		<div>
 			<div class="image_field">
-				<%#= attachment_image_tag @item, :image, format: "jpeg", id: "img_prev", fallback: "no-image.png", class: "admin_item_image" %>
+				<%= image_tag @item.get_image, id: "img_prev", class: "admin_item_image" %>
 			</div>
 		</div>
 		<table class="admin_item_info">
-			<thead>
-				<tr>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
 					<td>商品名</td>
@@ -21,10 +15,6 @@
 				<tr>
 					<td>商品説明</td>
 					<td><%= @item.introduction %></td>
-				</tr>
-				<tr>
-					<td>ジャンル</td>
-					<td><%= link_to @item.genre.name, admin_items_path(genre_id: @item.genre_id), class: "underline" %></td>
 				</tr>
 				<tr>
 					<td>税抜価格</td>

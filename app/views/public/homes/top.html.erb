@@ -1,20 +1,15 @@
 <section class="wrapper flex">
 
-	<div class="content">
-		<div class="mv">
-			<p></p>
-		</div>
-		<h2 class="section-ttl">オススメ商品</h2>
-		<div class="items">
-			<% @items.each do |item| %>
-				<%= link_to item_path(item) do %>
-					<%#= image_tag item.get_image %>
-					<p><%= item.name %></p>
-					<p><%= item.with_tax_price %>円</p>
-				<% end %>
-			<% end %>
-		</div>
-
-
+    	<main class="mb-auto, my-auto">
+    		<div class="toumei">
+				<h2 class="section-ttl">🔥キャンプグッズ販売・紹介サイト🔥</h2>
+				<h4 class="section">
+					キャンプグッズを販売するだけではなく<br>
+					キャンプ初心者でも利用しやすく<br>
+					グッズの使用方法動画もユーザー様自身で投稿できるサイト
+				</h4>
+			</div>
+		</main>
+	
 	</div>
 </section>

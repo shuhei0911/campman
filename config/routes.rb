@@ -10,11 +10,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
       get 'top' => 'homes#top', as: 'top'
-      get 'search' => 'homes#search', as: 'search'
       get 'customers/:customer_id/orders' => 'orders#index', as: 'customer_orders'
       resources :customers, only: [:index, :show, :edit, :update]
       resources :items, except: [:destroy]
-      resources :genres, only: [:index, :create, :edit, :update]
       resources :orders, only: [:index, :show, :update] do
         resources :order_details, only: [:update]
       end
@@ -30,7 +28,6 @@ Rails.application.routes.draw do
       root 'homes#top'
 
       get 'customers/mypage' => 'customers#show', as: 'mypage'
-      # customers/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
       get 'customers/information/edit' => 'customers#edit', as: 'edit_information'
       patch 'customers/information' => 'customers#update', as: 'update_information'
       get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'confirm_unsubscribe'

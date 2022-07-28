@@ -1,19 +1,12 @@
+<div class="toumei">
 <section class="wrapper flex">
-	<div class="sidebar">
-		<h3>使用動画一覧</h3>
-		<% @genres.each do |genre| %>
-		<%= link_to genre.name, items_path(genre_id: genre.id) %>
-		<% end %>
-	</div>
-
 	<div class="content">
 		<h2 class="section-ttl"><%= @item.name %></h2>
 		<%= render 'layouts/error_messages', resource: @cart_item %>
 		<div class="flex">
-			<%#= attachment_image_tag @item, :image, format: "jpeg", fallback: "no-image.png", class: "item_image" %>
+			
 			<div class="item_info">
 				<h4><%= @item.introduction %></h4>
-				<p>ジャンル: <%= link_to @item.genre.name, items_path(genre_id: @item.genre_id) %></p>
 				<p>
 					¥<%= @item.with_tax_price %>(税込)
 					<% if @item.is_active? %>
@@ -49,7 +42,7 @@
 	<div>
   	<p>コメント件数：<%= @item.comments.count %></p>
   	<% @item.comments.each do |comment| %>
-    	<p><%#= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+    	<p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
     	<%= comment.customer.first_name %>
     	<%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
     	<% if comment.customer == current_customer %>
@@ -79,3 +72,4 @@
 	</div>
 
 </section>
+</div>

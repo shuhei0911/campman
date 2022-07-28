@@ -1,18 +1,28 @@
-<section class="wrapper flex">
-	<div class="inner">
-		<% if params[:genre_id] %>
-			<h2 class="section-ttl"><%= @genre.name %>の商品一覧 (全<%= @all_items_count %>件)</h2>
-		<% else %>
-			<h2 class="section-ttl">商品一覧 (全<%= @all_items_count %>件)</h2>
-		<% end %>
-		<h3 class="text-right">
-			<%= link_to "+", new_admin_item_path, class: "new_admin_item" %>
-		</h3>
-		<% if @items.first %> <!-- @item.existsと同義、SQL1個分削減(?) -->
-			<%= render 'admin/items/index', items: @items %>
-			<%= paginate @items %>
-		<% else %>
-			<h3>対応する商品はありませんでした。</h3>
-		<% end %>
-	</div>
-</section>
+<div class="container mb-5">
+  <div class="row mr-3 d-flex">
+    <h2 class="mx-5 mt-3 px-4 bg-light shadow">商品一覧</h2>
+  </div>
+  <div class="d-flex justify-content-end">
+      <%= link_to "追加商品登録", new_admin_item_path, class: "btn mb-3 shadow pulus color: black" %>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <table class="table table-hover shadow">
+      <thead class="bg-light">
+        <tr>
+          <th>商品ID</th>
+          <th>商品名</th>
+          <th>税抜価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= link_to item.name, admin_item_path(item.id), class: "item-link" %></td>
+          <td><%= item.price %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

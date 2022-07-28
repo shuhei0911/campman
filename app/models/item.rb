@@ -1,8 +1,7 @@
 class Item < ApplicationRecord
-  belongs_to :genre
   has_many :cart_items, dependent: :destroy
   has_many :order_details
-  #has_one_attached :image
+  has_one_attached :image
 
   belongs_to :customer, optional: true
   has_many :comments, dependent: :destroy
@@ -11,9 +10,9 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
   validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
-  #validate :image_type
+  validate :image_type
 
-  scope :where_genre_active, -> { joins(:genre).where(genres: { is_active: true }) }
+  scope :where_item_active, -> { joins(:item).where(items: { is_active: true }) }
 
    def favorited_by?(customer)
       favorites.exists?(customer_id: customer.id)
@@ -39,11 +38,11 @@ class Item < ApplicationRecord
 
   def self.recommended
     recommends = []
-    active_genres = Genre.only_active.includes(:items)
-    active_genres.each do |genre|
-      item = genre.items.last
-      recommends << item if item
-    end
+    #active_items = Item.only_active.includes(:items)
+    #active_items.each do |item|
+      #item = items.last
+      #recommends << item if item
+    #end
     recommends
   end
 
@@ -56,6 +55,4 @@ class Item < ApplicationRecord
       errors.add(:image, 'はJPEGまたはPNG形式を選択してアップロードしてください')
     end
   end
-
-
 end

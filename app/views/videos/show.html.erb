@@ -1,19 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="toumei">
+  <p id="notice"><%= notice %></p>
+  <h1>動画閲覧画面</h1>
+  <p>
+    <strong>タイトル:</strong>
+    <%= @video.title %>
+  </p>
 
-<p>
-  <strong>title:</strong>
-  <%= @video.title %>
-</p>
+  <p>
+    <strong>コメント:</strong>
+    <%= @video.introduction %>
+  </p>
 
-<p>
-  <strong>introduction:</strong>
-  <%= @video.introduction %>
-</p>
+  <p>
+    <strong>Youtube動画:</strong>
+    <iframe width="150" height="150" src="https://www.youtube.com/embed/<%= @video.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </p>
 
-<p>
-  <strong>Youtube url:</strong>
-  <iframe width="240" height="240" src="https://www.youtube.com/embed/<%= @video.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+<%= link_to '編集する', edit_video_path(@video), class: "btn btn-success ml2"%> |
+<%= link_to '戻る', videos_path, class: "btn btn-success ml2" %>
 
-<%= link_to '編集する', edit_video_path(@video) %> |
-<%= link_to '戻る', videos_path %>
+</div>

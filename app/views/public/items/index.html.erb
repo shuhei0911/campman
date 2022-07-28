@@ -1,24 +1,25 @@
-<section class="wrapper flex">
-	<div class="sidebar">
-		<h3>使い方動画一覧</h3>
-		<% @genres.each do |genre| %>
-			<%= link_to genre.name, items_path(genre_id: genre.id) %>
-		<% end %>
-	</div>
-	<div class="content">
-		<% if params[:genre_id] %>
-			<h2 class="section-ttl"><%= @genre.name %>の商品一覧 (全<%= @all_items_count %>件)</h2>
-		<% else %>
-			<h2 class="section-ttl">商品一覧 (全<%= @all_items_count %>件)</h2>
-		<% end %>
-		<% if @items.first %> <!-- @item.existsと同義、SQL1個分削減(?) -->
-			<div class="items">
-				<% @items.each do |item| %>
-					<%= link_to item_path(item) do %>
-						<%#= image_tag item.get_image, format: "jpeg", fallback: "no-image.png" %>
-						<h5><%= item.genre.name %></h5>
-						<p><%= item.name %></p>
-						<p>
+<div class="toumei">
+	<section class="wrapper flex">
+		<h2 class="section-ttl">商品一覧</h2>
+		<div class="card-list-container py-5">
+  	<% @items.each do |item| %>
+  	<div class="card w-50 mx-auto mt-4 shadow-lg">
+    	<%= link_to item_path(item) do %>
+      	<%= image_tag item.get_image, class:"card-img-top"; %>
+    	<% end %>
+    	<div class="card-body">
+      	<div class="row">
+        	<div class="col-2">
+          	<%= image_tag item.get_image(50,50), class:"mt-3 rounded-circle"; %>
+        	</div>
+        	<div class="col-10">
+          	<p class="card-title">
+            	<%= link_to(item_path(item.id), class:"text-dark") do %>
+              	<strong><i class="far fa-flag"></i><span> <%= item.name %></span></strong>
+            	<% end %>
+          	</p>
+          	<p class="card-text">説明：<%= item.introduction %></p>
+          	<p>
 							<%= item.with_tax_price %>円
 							<% if item.is_active? %>
 								<span class="text-active">販売中</span>
@@ -26,14 +27,12 @@
 								<span class="text-invalid">販売停止中</span>
 							<% end %>
 						</p>
-						<p><%= link_to "#{item.comments.count} コメント", item_path(item.id) %></p>
-					<% end %>
-				<% end %>
-			</div>
-			<%= paginate @items %>
-		<% else %>
-			<h3>対応する商品はありませんでした。</h3>
-		<% end %>
-
+          	<span><%= link_to "#{item.comments.count} コメント", item_path(item.id), class:"text-dark" %></span>
+        	</div>
+      	</div>
+    	</div>
+  	</div>
+  	<% end %>
+  	<%#= paginate post_images %>
 	</div>
-</section>
+</div>

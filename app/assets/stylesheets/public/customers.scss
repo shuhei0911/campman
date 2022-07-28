@@ -1,12 +1,16 @@
-// Place all the styles related to the videos controller here.
+// Place all the styles related to the public/car_items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
 
-.new_video{
+
+.toumei{
   color: #000;
-  text-align: center;
   font-weight: bold;
+  overflow: scroll;
 }
 
+.flex.justify-around.mt2{
+  text-align: center;
+}
