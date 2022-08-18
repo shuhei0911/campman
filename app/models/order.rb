@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   scope :ordered_today, -> { where(created_at: Constants::BEGINNING_OF_TODAY...Constants::BEGINNING_OF_TOMORROW) }
 
   enum payment_method: { credit: 0, cash: 1 }
-  enum status: { waiting: 0, confirm: 1, shipping: 2, shipped: 3 }
+  enum status: { waiting: 0, confirm: 1, shipping: 2, delivery_completed: 3 }
 
   def get_shipping_informations_from(resource)
     class_name = resource.class.name
