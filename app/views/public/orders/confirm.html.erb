@@ -16,7 +16,7 @@
 					<% item = cart_item.item %>
 					<tr>
 						<td>
-							<%= attachment_image_tag item, :image, format: "jpeg", fallback: "no-image.png", class: "cart_item_image" %>
+							<%#= attachment_image_tag item, :image, format: "jpeg", fallback: "no-image.png", class: "cart_item_image" %>
 						</td>
 						<td><%= item.name %></td>
 						<td><%= item.with_tax_price %>円</td>
@@ -51,9 +51,9 @@
 	</div>
 	<%= form_for(@order, url: orders_path) do |f| %>
 		<div class="field">
-			<%= f.label :payment_method, "支払い方法" %>
-			<p><%= @order.payment_method_i18n %></p>
-			<%= f.hidden_field :payment_method, value: @order.payment_method %>
+			<%= f.label :payment, "支払い方法" %>
+			<p><%= @order.payment %></p>
+			<%= f.hidden_field :payment, value: @order.payment %>
 		</div>
 		<div class="field">
 			<label>お届け先</label>

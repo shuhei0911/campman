@@ -22,8 +22,8 @@
     <%= f.text_area :introduction %>
   </div>
   <div class="field">
-    <%= f.label :youtube動画（URL） %>
-    <%= f.text_field :youtube_url %>
+    <%= f.label :youtube動画（URL下11桁） %>
+    <%= f.text_area :youtube_url, :placeholder =>"共有から表示されるURL下11桁" %>
   </div>
   <div class="actions">
     <%= f.submit '投稿する' %>

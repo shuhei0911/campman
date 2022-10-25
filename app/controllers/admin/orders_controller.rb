@@ -19,9 +19,8 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
-    if @order.update(order_params) && @order.confirm_deposit?
-      @order.order_details.update_all(making_status: 1)
-    end
+    @order = Order.find(params[:id])
+    @order.update(order_params)
     redirect_to admin_order_path(@order)
   end
 

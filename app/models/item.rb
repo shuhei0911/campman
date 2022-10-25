@@ -46,6 +46,7 @@ class Item < ApplicationRecord
     recommends
   end
 
+
   private
 
   def image_type

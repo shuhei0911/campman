@@ -9,10 +9,10 @@ class Order < ApplicationRecord
   validates :shipping_cost, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
   validates :grand_total, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 
-  scope :ordered_today, -> { where(created_at: Constants::BEGINNING_OF_TODAY...Constants::BEGINNING_OF_TOMORROW) }
+  #scope :ordered_today, -> { where(created_at: Constants::BEGINNING_OF_TODAY...Constants::BEGINNING_OF_TOMORROW) }
 
-  enum payment_method: { credit: 0, cash: 1 }
-  enum status: { waiting: 0, confirm: 1, shipping: 2, delivery_completed: 3 }
+  enum order_status: { 入金待ち: 0, 入金完了: 1, 発送前: 2, 発送済み: 3 }
+  enum payment: { クレジットカード: 0, 銀行振込: 1 }
 
   def get_shipping_informations_from(resource)
     class_name = resource.class.name

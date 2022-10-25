@@ -2,6 +2,19 @@
 	<section class="wrapper flex">
 		<h2 class="section-ttl">商品一覧</h2>
 		<div class="card-list-container py-5">
+
+		<%= search_form_for @q do |f| %>
+  			<%= f.text_field :name_cont %>
+  			<%= f.submit "検索" %>
+		<% end %>
+
+		<% if @items.present? %>
+		<% else %>
+  			<p>検索結果はありません</p>
+		<% end %>
+
+
+
   	<% @items.each do |item| %>
   	<div class="card w-50 mx-auto mt-4 shadow-lg">
     	<%= link_to item_path(item) do %>
@@ -33,6 +46,5 @@
     	</div>
   	</div>
   	<% end %>
-  	<%#= paginate post_images %>
 	</div>
 </div>

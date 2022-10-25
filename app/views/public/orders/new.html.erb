@@ -9,20 +9,20 @@
 	<%= form_for(@order, url: orders_confirm_path) do |f| %>
 		<div class="field mb2">
 			<h3>支払い方法</h3>
-	  	<%= f.radio_button :payment_method, "credit_card", :checked => true %>
-	  	<%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %> <!-- クレジットカード -->
-	  	<%= f.radio_button :payment_method, "transfer" %>
-	  	<%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %> <!-- 銀行振込 -->
-		</div>
+			 <div class='container'>
+      	<%= f.radio_button :payment, Order.payments.key(0), checked: true %>
+      	<%= f.label :payment, 'クレジットカード' %>
+      	<br>
+      	<%= f.radio_button :payment, Order.payments.key(1) %>
+      	<%= f.label :payment, '銀行振込' %>
+       </div>
+    </div>
+
 		<h3>お届け先</h3>
 		<div class="field mb2 select_address_0">
 			<label class="fz16"><%= radio_button_tag :select_address, 0, :checked => true %>ご自身の住所</label>
 			<p>〒<%= current_customer.postal_code %> <%= current_customer.address %></p>
 			<p><%= current_customer.full_name %></p>
-		</div>
-		<div class="field mb2 select_address_1">
-			<label class="fz16"><%= radio_button_tag "select_address", 1 %>登録済住所から選択</label>
-			<%= select_tag "address_id", options_from_collection_for_select(current_customer.addresses, :id, :finally_address), prompt: "住所を選択してください" %>
 		</div>
 		<div class="field mb2 select_address_2">
 			<label class="fz16"><%= radio_button_tag "select_address", 2 %>新しいお届け先</label>
@@ -31,7 +31,7 @@
 				<%= f.text_field :postal_code, autocomplete: "postal_code", placeholder: "郵便番号", class: "jpostal_code" %>
 			</div>
 			<div class="field">
-				<%= f.label :destination, "住所(郵便番号から自動入力)" %>
+				<%= f.label :destination, "住所" %>
 				<%= f.text_field :destination, autocomplete: "destination", placeholder: "住所", class: "jpostal_address" %>
 			</div>
 			<div class="field">

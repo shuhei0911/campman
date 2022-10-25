@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  resources :users do
+    collection do
+      get 'search'
+    end
+  end
+  
   resources :videos
    post 'video/:id' => 'homes#top'
    resources :video, only: [:index, :new, :create,:edit ,:update, :destroy]
